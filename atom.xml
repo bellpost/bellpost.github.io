@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://bellpost@github.io/"/>
-  <updated>2020-07-16T05:24:21.196Z</updated>
+  <updated>2020-07-16T06:13:09.010Z</updated>
   <id>https://bellpost@github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://bellpost@github.io/2020/07/16/milk-quality/"/>
     <id>https://bellpost@github.io/2020/07/16/milk-quality/</id>
     <published>2020-07-16T04:40:51.000Z</published>
-    <updated>2020-07-16T05:24:21.196Z</updated>
+    <updated>2020-07-16T06:13:09.010Z</updated>
     
     <summary type="html">
     
@@ -38,11 +38,11 @@
   </entry>
   
   <entry>
-    <title>Homebrew镜像源替换及还原镜像源|macOS</title>
+    <title>Homebrew镜像源替换及还原</title>
     <link href="https://bellpost@github.io/2020/07/16/homebrew-source-replace-and-restore/"/>
     <id>https://bellpost@github.io/2020/07/16/homebrew-source-replace-and-restore/</id>
     <published>2020-07-16T03:55:18.000Z</published>
-    <updated>2020-07-16T05:26:19.171Z</updated>
+    <updated>2020-07-16T05:38:01.142Z</updated>
     
     <summary type="html">
     
@@ -50,6 +50,8 @@
     
     </summary>
     
+    
+      <category term="macOS" scheme="https://bellpost@github.io/categories/macOS/"/>
     
     
       <category term="macOS" scheme="https://bellpost@github.io/tags/macOS/"/>
@@ -61,7 +63,7 @@
     <link href="https://bellpost@github.io/2020/07/15/mysql-build-install/"/>
     <id>https://bellpost@github.io/2020/07/15/mysql-build-install/</id>
     <published>2020-07-15T11:31:58.000Z</published>
-    <updated>2020-07-16T05:30:50.848Z</updated>
+    <updated>2020-07-16T05:35:25.667Z</updated>
     
     <summary type="html">
     
