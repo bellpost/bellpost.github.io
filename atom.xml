@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Bellpost</title>
+  <icon>https://bellpost@github.io/icon.png</icon>
+  <subtitle>见招拆招</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://bellpost@github.io/"/>
+  <updated>2020-07-16T05:24:21.196Z</updated>
+  <id>https://bellpost@github.io/</id>
+  
+  <author>
+    <name>bellpost</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>牛奶品质探讨</title>
+    <link href="https://bellpost@github.io/2020/07/16/milk-quality/"/>
+    <id>https://bellpost@github.io/2020/07/16/milk-quality/</id>
+    <published>2020-07-16T04:40:51.000Z</published>
+    <updated>2020-07-16T05:24:21.196Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;导语：&lt;/strong&gt;在推上看到有人讨论喝国内牛奶腹泻，喝国外牛奶从不腹泻，引起了我的好奇心，难道加工工艺有很大差别吗？还是奶质的差别？还是制度约束不够呢？这些问题我也无从回答，只是搜集相关资料整理。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="生活" scheme="https://bellpost@github.io/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="milk" scheme="https://bellpost@github.io/tags/milk/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Homebrew镜像源替换及还原镜像源|macOS</title>
+    <link href="https://bellpost@github.io/2020/07/16/homebrew-source-replace-and-restore/"/>
+    <id>https://bellpost@github.io/2020/07/16/homebrew-source-replace-and-restore/</id>
+    <published>2020-07-16T03:55:18.000Z</published>
+    <updated>2020-07-16T05:26:19.171Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;导语：&lt;/strong&gt; Homebrew以前使用阿里云镜像源一直体验不佳，比较多的包请求不到，需要编译，十分慢及耗资源，所以换成清华大学镜像源,在此记录下。&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="macOS" scheme="https://bellpost@github.io/tags/macOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MySQL5.5编译安装</title>
+    <link href="https://bellpost@github.io/2020/07/15/mysql-build-install/"/>
+    <id>https://bellpost@github.io/2020/07/15/mysql-build-install/</id>
+    <published>2020-07-15T11:31:58.000Z</published>
+    <updated>2020-07-16T05:30:50.848Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;导语：&lt;/strong&gt; 一篇老的blog，写的不好，勿怪。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="数据库" scheme="https://bellpost@github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+      <category term="mysql" scheme="https://bellpost@github.io/tags/mysql/"/>
+    
+  </entry>
+  
+</feed>
