@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://bellpost@github.io/"/>
-  <updated>2020-07-16T06:13:09.010Z</updated>
+  <updated>2020-07-16T09:00:49.618Z</updated>
   <id>https://bellpost@github.io/</id>
   
   <author>
@@ -15,6 +15,86 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>详细讲解U盘制作启动盘安装Linux</title>
+    <link href="https://bellpost@github.io/2020/07/16/U-disk-install-linux/"/>
+    <id>https://bellpost@github.io/2020/07/16/U-disk-install-linux/</id>
+    <published>2020-07-16T08:53:33.000Z</published>
+    <updated>2020-07-16T09:00:49.618Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;导语：&lt;/strong&gt;制作启动盘的方法有很多，现介绍下面一款软件的使用过程。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="https://bellpost@github.io/categories/Linux/"/>
+    
+    
+      <category term="Linux" scheme="https://bellpost@github.io/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>来写写如何手动迁移hbase的数据</title>
+    <link href="https://bellpost@github.io/2020/07/16/migrating-hbase-data/"/>
+    <id>https://bellpost@github.io/2020/07/16/migrating-hbase-data/</id>
+    <published>2020-07-16T08:32:34.000Z</published>
+    <updated>2020-07-16T08:50:44.423Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;导语：&lt;/strong&gt;hbase数据迁移有多种方式，有静态的动态的，网上一堆。下面我说说上周实际使用import和export方式的过程。 &lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="hbase" scheme="https://bellpost@github.io/tags/hbase/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用brew安装指定版本node</title>
+    <link href="https://bellpost@github.io/2020/07/16/brew-node-choose-version/"/>
+    <id>https://bellpost@github.io/2020/07/16/brew-node-choose-version/</id>
+    <published>2020-07-16T07:45:26.000Z</published>
+    <updated>2020-07-16T08:01:02.366Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;导语：&lt;/strong&gt; 手贱升级brew update， 导致node升级到14版本，hexo的node使用时总是报错，所以需要退回到node@10版本&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="macOS" scheme="https://bellpost@github.io/categories/macOS/"/>
+    
+    
+      <category term="macOS" scheme="https://bellpost@github.io/tags/macOS/"/>
+    
+      <category term="node" scheme="https://bellpost@github.io/tags/node/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>squid实现突破内网上网</title>
+    <link href="https://bellpost@github.io/2020/07/16/use-squid-break-through-the-internet/"/>
+    <id>https://bellpost@github.io/2020/07/16/use-squid-break-through-the-internet/</id>
+    <published>2020-07-16T07:20:10.000Z</published>
+    <updated>2020-07-16T08:36:19.594Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;导语：&lt;/strong&gt;实现代理上网的前提：在局域网内有一台可以访问外网的机器，并可以在上面部署squid程序。&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>牛奶品质探讨</title>
