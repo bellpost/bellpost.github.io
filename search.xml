@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Nmap资料整理</title>
+      <link href="/2020/07/17/understanding-nmap/"/>
+      <url>/2020/07/17/understanding-nmap/</url>
+      
+        <content type="html"><![CDATA[<p><strong>导语：</strong>工作中，经常用到Nmap去检查端口，探测主机服务。实际上，Nmap除了这些，其他的功能也非常强大，扩展性非常强。你大概不能想到Nmap还能连接数据库查询表数据，执行相关sql。</p><a id="more"></a><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Nmap 能够快速发现活动的主机和与该主机相关联的服务。Nmap 的功能还可以通过结合 Nmap 脚本引擎（ NSE）进一步被扩展。Nmap还有图形界面Zenmap，可以通过图形界面学习命令行nmap的使用，降低了学习成本。</p><h2 id="快速上手"><a href="#快速上手" class="headerlink" title="快速上手"></a>快速上手</h2><p>快速上手的方法，无他，多看文档。如下是相关文档：</p><ul><li><p>Nmap：<br><a href="https://nmap.org/man/zh/index.html" target="_blank" rel="noopener">https://nmap.org/man/zh/index.html</a></p></li><li><p>NSE：<br><a href="https://nmap.org/nsedoc/" target="_blank" rel="noopener">https://nmap.org/nsedoc/</a></p></li><li><p>Zenmap：<br><a href="https://nmap.org/book/zenmap.html" target="_blank" rel="noopener">https://nmap.org/book/zenmap.html</a></p></li></ul><p>如果你想多了解就查看文档吧，多说也是对文档的重复。</p><h2 id="脚本引擎NSE"><a href="#脚本引擎NSE" class="headerlink" title="脚本引擎NSE"></a>脚本引擎NSE</h2><p>Nmap扩展性强的地方是能够通过脚本引擎扩展功能（NSE），脚本都是通过lua语言编写，下面展示下mysql-info这个脚本查看mysql的相关信息(ip地址用XXX.XXX.XXX.XXX标识)：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">➜  nmap --script mysql-info XXX.XXX.XXX.XXX</span><br><span class="line">Starting Nmap 7.80 ( https://nmap.org ) at 2020-07-17 16:19 CST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> XXX.XXX.XXX.XXX </span><br><span class="line">Host is up (0.030s latency).</span><br><span class="line">Not shown: 995 filtered ports</span><br><span class="line">PORT     STATE SERVICE</span><br><span class="line">22/tcp   open  ssh</span><br><span class="line">53/tcp   open  domain</span><br><span class="line">80/tcp   open  http</span><br><span class="line">443/tcp  open  https</span><br><span class="line">3306/tcp open  mysql</span><br><span class="line">| mysql-info:</span><br><span class="line">|   Protocol: 10</span><br><span class="line">|   Version: 5.7.24-0ubuntu0.16.04.1-log</span><br><span class="line">|   Thread ID: 8732</span><br><span class="line">|   Capabilities flags: 63487</span><br><span class="line">|   Some Capabilities: DontAllowDatabaseTableColumn, Support41Auth, LongColumnFlag, LongPassword, SupportsLoadDataLocal, ConnectWithDatabase, Speaks41ProtocolOld, SupportsTransactions, IgnoreSpaceBeforeParenthesis, FoundRows, ODBCClient, InteractiveClient, Speaks41ProtocolNew, SupportsCompression, IgnoreSigpipes, SupportsMultipleResults, SupportsMultipleStatments, SupportsAuthPlugins</span><br><span class="line">|   Status: Autocommit</span><br><span class="line">|   Salt:</span><br><span class="line">| \x14]jy6vmpQ&lt;@vJv\x1F,\x15\x7F&amp;</span><br><span class="line">|_  Auth Plugin Name: mysql_native_password</span><br><span class="line"></span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 7.72 seconds</span><br></pre></td></tr></table></figure><p>脚本扩展了非常多的功能，包括mysql mongo ssh snmp smb http pop3 等各种软件及协议的支持。</p><h2 id="Zenmap优势"><a href="#Zenmap优势" class="headerlink" title="Zenmap优势"></a>Zenmap优势</h2><p>多说一点Zenmap的优势：</p><ul><li>通过图形界面可以实时查看命令的组成变化。</li><li>可以在扫描一个网段后生成拓扑图</li><li>可以将常用的命令保存为配置，后面不用重复写复杂的Nmap命令</li></ul><p>实际在mac上使用，发现并不稳定。非常容易卡死，也可能是我更新系统版本的原因，所以还是推荐在Linux和windows环境上使用吧。</p><p><img src="nmap1.png" alt="Zenmap mac"></p><h2 id="Nmap相关项目"><a href="#Nmap相关项目" class="headerlink" title="Nmap相关项目"></a>Nmap相关项目</h2><p>项目：将nmap报告转换为XLS的Python脚本</p><p><a href="https://github.com/mrschyte/nmap-converter" target="_blank" rel="noopener">nmap-converter</a></p><p>项目：专门用于开发Nmap脚本的IDE</p><p><a href="https://github.com/s4n7h0/Halcyon" target="_blank" rel="noopener">Halcyon</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> network </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> nmap </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>详细讲解U盘制作启动盘安装Linux</title>
       <link href="/2020/07/16/U-disk-install-linux/"/>
       <url>/2020/07/16/U-disk-install-linux/</url>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://bellpost@github.io/"/>
-  <updated>2020-07-16T09:00:49.618Z</updated>
+  <updated>2020-07-17T08:26:24.003Z</updated>
   <id>https://bellpost@github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Nmap资料整理</title>
+    <link href="https://bellpost@github.io/2020/07/17/understanding-nmap/"/>
+    <id>https://bellpost@github.io/2020/07/17/understanding-nmap/</id>
+    <published>2020-07-17T07:43:02.000Z</published>
+    <updated>2020-07-17T08:26:24.003Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;导语：&lt;/strong&gt;工作中，经常用到Nmap去检查端口，探测主机服务。实际上，Nmap除了这些，其他的功能也非常强大，扩展性非常强。你大概不能想到Nmap还能连接数据库查询表数据，执行相关sql。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="network" scheme="https://bellpost@github.io/categories/network/"/>
+    
+    
+      <category term="nmap" scheme="https://bellpost@github.io/tags/nmap/"/>
+    
+  </entry>
   
   <entry>
     <title>详细讲解U盘制作启动盘安装Linux</title>
