@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://bellpost@github.io/"/>
-  <updated>2020-07-17T08:26:24.003Z</updated>
+  <updated>2020-07-20T05:23:12.306Z</updated>
   <id>https://bellpost@github.io/</id>
   
   <author>
@@ -15,6 +15,50 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>man命令详解</title>
+    <link href="https://bellpost@github.io/2020/07/20/linux-man-command/"/>
+    <id>https://bellpost@github.io/2020/07/20/linux-man-command/</id>
+    <published>2020-07-20T04:26:11.000Z</published>
+    <updated>2020-07-20T05:23:12.306Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;导语：&lt;/strong&gt;对于Linux的学习，man命令的了解至关重要。换一句话说就是读官方文档的能力。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="https://bellpost@github.io/categories/Linux/"/>
+    
+    
+      <category term="linux" scheme="https://bellpost@github.io/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux修改登录提示语(MOTD)</title>
+    <link href="https://bellpost@github.io/2020/07/20/linux-login-message/"/>
+    <id>https://bellpost@github.io/2020/07/20/linux-login-message/</id>
+    <published>2020-07-20T02:58:11.000Z</published>
+    <updated>2020-07-20T04:23:28.552Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;导语：&lt;/strong&gt; 意外发现linux登录的提示可以修改，可以显示当前的系统信息以及自定义欢迎语等功能，让我有了好奇心。下文主要介绍update-motd方式修改。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="https://bellpost@github.io/categories/Linux/"/>
+    
+    
+      <category term="motd" scheme="https://bellpost@github.io/tags/motd/"/>
+    
+      <category term="linux" scheme="https://bellpost@github.io/tags/linux/"/>
+    
+  </entry>
   
   <entry>
     <title>Nmap资料整理</title>
