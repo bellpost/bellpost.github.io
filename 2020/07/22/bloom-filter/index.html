@@ -1,0 +1,83 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="见招拆招"><title>布隆过滤器原理 | Bellpost</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/clipboard/dist/clipboard.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.js"></script><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.css"><meta name="generator" content="Hexo 4.2.1"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">布隆过滤器原理</h1><a id="logo" href="/.">Bellpost</a><p class="description">见招拆招</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/navigation/"><i class="fa fa-book"> 网址导航</i></a><a href="/tags/"><i class="fa fa-tags"> 标签</i></a><a href="/timeline/"><i class="fa fa-history"> 历史</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">布隆过滤器原理</h1><div class="post-meta">2020-07-22</div><a class="disqus-comment-count" data-disqus-identifier="2020/07/22/bloom-filter/" href="/2020/07/22/bloom-filter/#disqus_thread"></a><div class="clear"><div class="toc-article" id="toc"><div class="toc-title">文章目录</div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-number">1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原理"><span class="toc-number">2.</span> <span class="toc-text">原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#优点"><span class="toc-number">3.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#缺点"><span class="toc-number">4.</span> <span class="toc-text">缺点</span></a></li></ol></div></div><div class="post-content"><p><strong>导语：</strong>在项目中使用过布隆过滤，非常强大，效率出奇的高，而且不怎么占用内存。在此记录下布隆过滤器原理。</p>
+<a id="more"></a>
+
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><blockquote>
+<p>Bloom Filter是1970年由Bloom提出的。它实际上是一个很长的二进制向量和一系列随机映射函数（Hash函数）。布隆过滤器可以用于检索一个元素是否在一个集合中。它的优点是空间效率和查询时间都远远超过一般的算法，缺点是有一定的误识别率和删除困难。Bloom Filter广泛的应用于各种需要查询的场合中，如Orocle的数据库，Google的BitTable也用了此技术。<br>摘自<a href="http://www.sigma.me/2011/09/13/hash-and-bloom-filter.html" target="_blank" rel="noopener">http://www.sigma.me/2011/09/13/hash-and-bloom-filter.html</a></p>
+</blockquote>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p><img src="bloom1.png" alt="原理"></p>
+<p>看着上面的图，按流程描述下原理。</p>
+<ol>
+<li>准备一个足够大的bit array表；</li>
+<li>将待处理数据List中的数据分别经过多个hash算法计算出hash值，并求余；</li>
+<li>将求余的多个值映射到bit array表，在多个余值的位上，由0置1。</li>
+</ol>
+<p>如果计算出的多个位上已经是1，则数据已存在，过滤掉，如果有一个或多个是0，则是新数据，保存bit位。</p>
+<p><strong>误报的情况</strong>: 当不同的数据计算出的bit位与后计算出来的bit位重合，会出现误报。</p>
+<p><img src="bloom2.png" alt="误报"></p>
+<p><strong>降低误报的方法</strong>:</p>
+<ul>
+<li>将bit array的size设置的够大</li>
+<li>使用更多的hash算法，但使用太多的hash算法也会降低效率，也可使用单个hash算法，通过按规则修改数据，得出不同的值来实现也可。</li>
+</ul>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul>
+<li>效率高</li>
+<li>不存在漏报</li>
+<li>空间占用低</li>
+<li>安全</li>
+</ul>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ul>
+<li>删除困难</li>
+<li>一定的识别率</li>
+</ul>
+</div><div class="post-copyright"><script type="text/javascript" src="/js/copyright.js" successtext="复制成功!"></script><link rel="stylesheet" type="text/css" href="/css/copyright.css"><p><span>本文标题：</span>布隆过滤器原理</p><p><span>文章作者：</span>bellpost</p><p><span>发布时间：</span>2020-07-22</p><p><span>最后更新：</span>2020-07-22</p><p><span>原始链接：</span><a href="/2020/07/22/bloom-filter/">https://bellpost@github.io/2020/07/22/bloom-filter/</a><span class="copy-path"><i class="fa fa-clipboard" data-clipboard-text="https://bellpost@github.io/2020/07/22/bloom-filter/"></i></span></p><p><span>版权声明：</span>本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！</p></div><br><div class="tags"></div><div class="post-nav"><a class="next" href="/2020/07/21/java-aop-exception-trigger/">利用java aop实现异常触发器</a></div><div id="disqus_thread"><div class="btn_click_load"><button class="disqus_click_btn">阅读评论（请确保 Disqus 可以正常加载）</button></div><script type="text/javascript">var disqus_config = function () {
+    this.page.url = 'https://bellpost@github.io/2020/07/22/bloom-filter/';
+    this.page.identifier = '2020/07/22/bloom-filter/';
+    this.page.title = '布隆过滤器原理';
+  };</script><script type="text/javascript" id="disqus-lazy-load-script">$.ajax({
+url: 'https://disqus.com/next/config.json',
+timeout: 2500,
+type: 'GET',
+success: function(){
+  var d = document;
+  var s = d.createElement('script');
+  s.src = '//Bellpost.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', + new Date());
+  (d.head || d.body).appendChild(s);
+  $('.disqus_click_btn').css('display', 'none');
+},
+error: function() {
+  $('.disqus_click_btn').css('display', 'block');
+}
+});</script><script type="text/javascript" id="disqus-click-load">$('.btn_click_load').click(() => {  //click to load comments
+    (() => { // DON'T EDIT BELOW THIS LINE
+        var d = document;
+        var s = d.createElement('script');
+        s.src = '//Bellpost.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', + new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    $('.disqus_click_btn').css('display','none');
+});</script><script type="text/javascript" id="disqus-count-script">$(function() {
+     var xhr = new XMLHttpRequest();
+     xhr.open('GET', '//disqus.com/next/config.json', true);
+     xhr.timeout = 2500;
+     xhr.onreadystatechange = function () {
+       if (xhr.readyState === 4 && xhr.status === 200) {
+         $('.post-meta .post-comments-count').show();
+         var s = document.createElement('script');
+         s.id = 'dsq-count-scr';
+         s.src = 'https://Bellpost.disqus.com/count.js';
+         s.async = true;
+         (document.head || document.body).appendChild(s);
+       }
+     };
+     xhr.ontimeout = function () { xhr.abort(); };
+     xhr.send(null);
+   });
+</script></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="search-form"><input id="local-search-input" placeholder="Search" type="text" name="q" results="0"/><div id="local-search-result"></div></div></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/macOS/">macOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/network/">network</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/milk/" style="font-size: 15px;">milk</a> <a href="/tags/macOS/" style="font-size: 15px;">macOS</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/node/" style="font-size: 15px;">node</a> <a href="/tags/hbase/" style="font-size: 15px;">hbase</a> <a href="/tags/nmap/" style="font-size: 15px;">nmap</a> <a href="/tags/motd/" style="font-size: 15px;">motd</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/openmediavault/" style="font-size: 15px;">openmediavault</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/07/22/bloom-filter/">布隆过滤器原理</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/21/java-aop-exception-trigger/">利用java aop实现异常触发器</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/21/linux-pam-to-openmediavault/">Linux pam在OMV中的应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/20/linux-man-command/">man命令详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/20/linux-login-message/">Linux修改登录提示语(MOTD)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/17/understanding-nmap/">Nmap资料整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/16/U-disk-install-linux/">详细讲解U盘制作启动盘安装Linux</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/16/migrating-hbase-data/">来写写如何手动迁移hbase的数据</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/16/brew-node-choose-version/">使用brew安装指定版本node</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/16/use-squid-break-through-the-internet/">squid实现突破内网上网</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><script type="text/javascript" src="//Bellpost.disqus.com/recent_comments_widget.js?num_items=5&amp;hide_avatars=1&amp;avatar_size=32&amp;excerpt_length=20&amp;hide_mods=1"></script></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2020 <a href="/." rel="nofollow">Bellpost.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.css"><link rel="stylesheet" type="text/css" href="/css/search.css?v=0.0.0"><script type="text/javascript" src="/js/search.js?v=0.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+   search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script type="text/javascript" src="/js/copycode.js" successtext="复制成功!"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>

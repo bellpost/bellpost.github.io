@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://bellpost@github.io/"/>
-  <updated>2020-07-20T05:23:12.306Z</updated>
+  <updated>2020-07-22T08:52:39.736Z</updated>
   <id>https://bellpost@github.io/</id>
   
   <author>
@@ -15,6 +15,63 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>布隆过滤器原理</title>
+    <link href="https://bellpost@github.io/2020/07/22/bloom-filter/"/>
+    <id>https://bellpost@github.io/2020/07/22/bloom-filter/</id>
+    <published>2020-07-22T06:27:26.000Z</published>
+    <updated>2020-07-22T08:52:39.736Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;导语：&lt;/strong&gt;在项目中使用过布隆过滤，非常强大，效率出奇的高，而且不怎么占用内存。在此记录下布隆过滤器原理。&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>利用java aop实现异常触发器</title>
+    <link href="https://bellpost@github.io/2020/07/21/java-aop-exception-trigger/"/>
+    <id>https://bellpost@github.io/2020/07/21/java-aop-exception-trigger/</id>
+    <published>2020-07-21T14:40:21.000Z</published>
+    <updated>2020-07-22T05:10:08.064Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;导语：&lt;/strong&gt;上线一些小的项目，项目出现异常，一般不能实时反馈，如何才能在出现异常时实时捕获反馈呢？&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Java" scheme="https://bellpost@github.io/categories/Java/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Linux pam在OMV中的应用</title>
+    <link href="https://bellpost@github.io/2020/07/21/linux-pam-to-openmediavault/"/>
+    <id>https://bellpost@github.io/2020/07/21/linux-pam-to-openmediavault/</id>
+    <published>2020-07-21T14:39:29.000Z</published>
+    <updated>2020-07-22T07:28:08.705Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;导语：&lt;/strong&gt;折腾过几次openmediavault，发现它使用的用户管理有点奇怪，用户信息没使用关系型数据库存储。so，就去钻研了下，它是如何实现的。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="https://bellpost@github.io/categories/Linux/"/>
+    
+    
+      <category term="openmediavault" scheme="https://bellpost@github.io/tags/openmediavault/"/>
+    
+  </entry>
   
   <entry>
     <title>man命令详解</title>
@@ -86,7 +143,7 @@
     <link href="https://bellpost@github.io/2020/07/16/U-disk-install-linux/"/>
     <id>https://bellpost@github.io/2020/07/16/U-disk-install-linux/</id>
     <published>2020-07-16T08:53:33.000Z</published>
-    <updated>2020-07-16T09:00:49.618Z</updated>
+    <updated>2020-07-22T04:26:40.803Z</updated>
     
     <summary type="html">
     
@@ -98,7 +155,7 @@
       <category term="Linux" scheme="https://bellpost@github.io/categories/Linux/"/>
     
     
-      <category term="Linux" scheme="https://bellpost@github.io/tags/Linux/"/>
+      <category term="linux" scheme="https://bellpost@github.io/tags/linux/"/>
     
   </entry>
   
