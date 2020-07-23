@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://bellpost@github.io/"/>
-  <updated>2020-07-23T03:55:25.643Z</updated>
+  <updated>2020-07-23T11:58:52.108Z</updated>
   <id>https://bellpost@github.io/</id>
   
   <author>
@@ -17,11 +17,68 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>布隆过滤器原理</title>
+    <title>文件系统特性及主流调度策略一览</title>
+    <link href="https://bellpost@github.io/2020/07/23/file-system-features/"/>
+    <id>https://bellpost@github.io/2020/07/23/file-system-features/</id>
+    <published>2020-07-23T10:39:23.000Z</published>
+    <updated>2020-07-23T11:58:52.108Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;导语：&lt;/strong&gt;常见文件系统特性总结及块设备队列调度策略介绍。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="https://bellpost@github.io/categories/Linux/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>vmstat和iostat使用方法</title>
+    <link href="https://bellpost@github.io/2020/07/23/vmstat-iostat-usage/"/>
+    <id>https://bellpost@github.io/2020/07/23/vmstat-iostat-usage/</id>
+    <published>2020-07-23T08:02:06.000Z</published>
+    <updated>2020-07-23T10:25:58.675Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;导语：&lt;/strong&gt;如何使用vmstat和iostat工具帮助我们了解操作系统状态。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="https://bellpost@github.io/categories/Linux/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>MYSQL预编译语句使用</title>
+    <link href="https://bellpost@github.io/2020/07/23/mysql-prepared-statements/"/>
+    <id>https://bellpost@github.io/2020/07/23/mysql-prepared-statements/</id>
+    <published>2020-07-23T04:49:19.000Z</published>
+    <updated>2020-07-23T12:25:58.854Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;导语：&lt;/strong&gt;在MySQL 4.1或更高版本的mysql上已经支持了预编译特性。通过该特性我们能提高执行效率。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="数据库" scheme="https://bellpost@github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>布隆过滤器原理及Guava源码解析</title>
     <link href="https://bellpost@github.io/2020/07/22/bloom-filter/"/>
     <id>https://bellpost@github.io/2020/07/22/bloom-filter/</id>
     <published>2020-07-22T06:27:26.000Z</published>
-    <updated>2020-07-23T03:55:25.643Z</updated>
+    <updated>2020-07-23T11:33:29.174Z</updated>
     
     <summary type="html">
     

@@ -1,0 +1,128 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="见招拆招"><title>vmstat和iostat使用方法 | Bellpost</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/clipboard/dist/clipboard.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.js"></script><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.css"><meta name="generator" content="Hexo 4.2.1"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">vmstat和iostat使用方法</h1><a id="logo" href="/.">Bellpost</a><p class="description">见招拆招</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/navigation/"><i class="fa fa-book"> 网址导航</i></a><a href="/tags/"><i class="fa fa-tags"> 标签</i></a><a href="/timeline/"><i class="fa fa-history"> 历史</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">vmstat和iostat使用方法</h1><div class="post-meta">2020-07-23<span> | </span><span class="category"><a href="/categories/Linux/">Linux</a></span></div><a class="disqus-comment-count" data-disqus-identifier="2020/07/23/vmstat-iostat-usage/" href="/2020/07/23/vmstat-iostat-usage/#disqus_thread"></a><div class="clear"><div class="toc-article" id="toc"><div class="toc-title">文章目录</div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#vmstat用法"><span class="toc-number">1.</span> <span class="toc-text">vmstat用法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#参数含义"><span class="toc-number">1.1.</span> <span class="toc-text">参数含义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#iostat用法"><span class="toc-number">2.</span> <span class="toc-text">iostat用法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#参数含义-1"><span class="toc-number">2.1.</span> <span class="toc-text">参数含义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#计算请求服务并发数"><span class="toc-number">2.2.</span> <span class="toc-text">计算请求服务并发数</span></a></li></ol></li></ol></div></div><div class="post-content"><p><strong>导语：</strong>如何使用vmstat和iostat工具帮助我们了解操作系统状态。</p>
+<a id="more"></a>
+
+<p>vmstat和iostat命令工具可以帮助我们了解操作系统状态。iostat和vmstat显示的第一行一般是系统从开机到现在的统计信息，一般不具有参考意义，请注意。</p>
+<h2 id="vmstat用法"><a href="#vmstat用法" class="headerlink" title="vmstat用法"></a>vmstat用法</h2><p>vmstat这个命令展示的信息非常全面，涵盖系统的各个方面。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">root@XXXX:~# vmstat 3 3</span><br><span class="line">procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----</span><br><span class="line"> r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st</span><br><span class="line"> 1  0      0 410428 181340 2627360    0    0     9   327    0    0  4  1 95  1  0</span><br><span class="line"> 1  0      0 410164 181340 2627368    0    0     0  1661 2204 4357  2  1 96  2  0</span><br><span class="line"> 0  0      0 410084 181340 2627416    0    0     0   696 2161 4310  1  1 97  1  0</span><br></pre></td></tr></table></figure>
+<p><code>vmstat 3 3</code> 第一个<code>3</code>设置每3秒刷新一次，后面一个<code>3</code>设置刷新次数。</p>
+<p><strong>注意</strong>内存、交换区、I/O统计是块数而不是字节。块大小通常是1024字节。</p>
+<h3 id="参数含义"><a href="#参数含义" class="headerlink" title="参数含义"></a>参数含义</h3><ul>
+<li><p><strong>procs</strong></p>
+<ul>
+<li><strong>r</strong>列显示多少进程在等待CPU</li>
+<li><strong>b</strong>列显示多少进程在阻塞状态（等待I/O）</li>
+</ul>
+</li>
+<li><p><strong>memory</strong></p>
+<ul>
+<li><strong>swpd</strong> 虚拟内存的使用量，如果不为0，则物理内存不足；（页面交换）</li>
+<li><strong>free</strong> 空闲内存</li>
+<li><strong>buff</strong> 用作缓冲区的内存</li>
+<li><strong>cache</strong> 缓存内存使用量</li>
+</ul>
+</li>
+<li><p><strong>swap</strong> 显示每秒有多少块被换入磁盘，多少块换出磁盘</p>
+<ul>
+<li><strong>si</strong> 换入磁盘</li>
+<li><strong>so</strong> 换出磁盘</li>
+</ul>
+</li>
+<li><p><strong>io</strong> 反映磁盘I/O</p>
+<ul>
+<li><strong>bi</strong> 从块设备中读取</li>
+<li>bo 从块设备中写出</li>
+</ul>
+</li>
+<li><p><strong>system</strong></p>
+<ul>
+<li><strong>in</strong> 每秒中断的数量</li>
+<li><strong>cs</strong> 每秒上下文切换的数量</li>
+</ul>
+</li>
+<li><p><strong>cpu</strong> 显示CPU花费在各类操作的百分比</p>
+<ul>
+<li><strong>us</strong> 执行用户代码花费的时间（非内核）</li>
+<li><strong>sy</strong> 执行系统代码（内核）</li>
+<li><strong>id</strong> 空闲时间</li>
+<li><strong>wa</strong> 等待I/O时间</li>
+<li><strong>st</strong> 虚拟机偷走的时间（虚拟化）</li>
+</ul>
+</li>
+</ul>
+<h2 id="iostat用法"><a href="#iostat用法" class="headerlink" title="iostat用法"></a>iostat用法</h2><p><code>iostat -c</code> 可以查看到CPU信息，但是我们主要还是使用这个命令的<code>-d</code>选项，查看设备统计信息。后面的<code>5</code>也是每5秒刷新一次。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">root@upup88-1:~# iostat -dx 5</span><br><span class="line">Device:         rrqm/s   wrqm/s     r/s     w/s    rkB/s    wkB/s avgrq-sz avgqu-sz   await r_await w_await  svctm  %util</span><br><span class="line">vda               0.00    11.09    0.51   26.11    17.99   647.31    49.98     0.11    3.95   13.25    3.77   0.76   2.03</span><br><span class="line"></span><br><span class="line">Device:         rrqm/s   wrqm/s     r/s     w/s    rkB/s    wkB/s avgrq-sz avgqu-sz   await r_await w_await  svctm  %util</span><br><span class="line">vda               0.00    13.00    0.00   38.60     0.00   805.60    41.74     0.04    0.97    0.00    0.97   0.62   2.40</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数含义-1"><a href="#参数含义-1" class="headerlink" title="参数含义"></a>参数含义</h3><ul>
+<li><strong>rrqm/s</strong> 每秒合并到设备中的读取请求的数量（合并是将多个逻辑请求合并为一个请求到实际磁盘）</li>
+<li><strong>wrqm/s</strong> 每秒合并到设备中的写入请求的数量</li>
+<li><strong>r/s</strong> 每秒发送到设备的读请求</li>
+<li><strong>w/s</strong> 每秒发送到设备的写请求</li>
+<li><strong>rkB/s</strong> 每秒从设备读取的扇区数</li>
+<li><strong>wkB/s</strong> 每秒从设备写入的扇区数</li>
+<li><strong>avgrq-sz</strong> 发出到设备的请求的平均大小（以扇区为单位）。</li>
+<li><strong>avgqu-sz</strong> 发出到设备的请求的平均队列长度。</li>
+<li><strong>await</strong> 磁盘排队花费的毫秒数 </li>
+<li><strong>r_await</strong> 磁盘读请求排队花费的毫秒数 </li>
+<li><strong>w_await</strong> 磁盘写请求排队花费的毫秒数</li>
+<li><strong>svctm</strong> 服务请求花费的时间，不包括排队时间</li>
+<li><strong>%util</strong> 向设备发出I/O请求的经过时间百分比，串行时接近100%时设备饱和，并行时不能反映设备极限。</li>
+</ul>
+<h3 id="计算请求服务并发数"><a href="#计算请求服务并发数" class="headerlink" title="计算请求服务并发数"></a>计算请求服务并发数</h3><p>读写的单位是秒，服务时间单位是千分之一毫秒。</p>
+<p>计算方式一：<br>              concurrency = （r/s + w/s）* (svctm / 1000)</p>
+<blockquote>
+<pre><code>利特尔法则（英语：Little&apos;s law），基于等候理论，由约翰·利特尔在1954年提出。利特尔法则可用于一个稳定的、非占先式的系统中。其内容为：
+在一个稳定的系统（L）中，长期的平均顾客人数，等于长期的有效抵达率（λ），乘以顾客在这个系统中平均的等待时间（W）；----维基百科</code></pre></blockquote>
+<p>计算方式二：<br>          concurrency = (avuqu_sz * svctm) / await</p>
+<p>通过平均队列大小、服务时间、以及平均等待时间。</p>
+</div><div class="post-copyright"><script type="text/javascript" src="/js/copyright.js" successtext="复制成功!"></script><link rel="stylesheet" type="text/css" href="/css/copyright.css"><p><span>本文标题：</span>vmstat和iostat使用方法</p><p><span>文章作者：</span>bellpost</p><p><span>发布时间：</span>2020-07-23</p><p><span>最后更新：</span>2020-07-23</p><p><span>原始链接：</span><a href="/2020/07/23/vmstat-iostat-usage/">https://bellpost@github.io/2020/07/23/vmstat-iostat-usage/</a><span class="copy-path"><i class="fa fa-clipboard" data-clipboard-text="https://bellpost@github.io/2020/07/23/vmstat-iostat-usage/"></i></span></p><p><span>版权声明：</span>本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！</p></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/2020/07/23/file-system-features/">文件系统特性及主流调度策略一览</a><a class="next" href="/2020/07/23/mysql-prepared-statements/">MYSQL预编译语句使用</a></div><div id="disqus_thread"><div class="btn_click_load"><button class="disqus_click_btn">阅读评论（请确保 Disqus 可以正常加载）</button></div><script type="text/javascript">var disqus_config = function () {
+    this.page.url = 'https://bellpost@github.io/2020/07/23/vmstat-iostat-usage/';
+    this.page.identifier = '2020/07/23/vmstat-iostat-usage/';
+    this.page.title = 'vmstat和iostat使用方法';
+  };</script><script type="text/javascript" id="disqus-lazy-load-script">$.ajax({
+url: 'https://disqus.com/next/config.json',
+timeout: 2500,
+type: 'GET',
+success: function(){
+  var d = document;
+  var s = d.createElement('script');
+  s.src = '//Bellpost.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', + new Date());
+  (d.head || d.body).appendChild(s);
+  $('.disqus_click_btn').css('display', 'none');
+},
+error: function() {
+  $('.disqus_click_btn').css('display', 'block');
+}
+});</script><script type="text/javascript" id="disqus-click-load">$('.btn_click_load').click(() => {  //click to load comments
+    (() => { // DON'T EDIT BELOW THIS LINE
+        var d = document;
+        var s = d.createElement('script');
+        s.src = '//Bellpost.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', + new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    $('.disqus_click_btn').css('display','none');
+});</script><script type="text/javascript" id="disqus-count-script">$(function() {
+     var xhr = new XMLHttpRequest();
+     xhr.open('GET', '//disqus.com/next/config.json', true);
+     xhr.timeout = 2500;
+     xhr.onreadystatechange = function () {
+       if (xhr.readyState === 4 && xhr.status === 200) {
+         $('.post-meta .post-comments-count').show();
+         var s = document.createElement('script');
+         s.id = 'dsq-count-scr';
+         s.src = 'https://Bellpost.disqus.com/count.js';
+         s.async = true;
+         (document.head || document.body).appendChild(s);
+       }
+     };
+     xhr.ontimeout = function () { xhr.abort(); };
+     xhr.send(null);
+   });
+</script></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="search-form"><input id="local-search-input" placeholder="Search" type="text" name="q" results="0"/><div id="local-search-result"></div></div></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/macOS/">macOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/network/">network</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/milk/" style="font-size: 15px;">milk</a> <a href="/tags/macOS/" style="font-size: 15px;">macOS</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/node/" style="font-size: 15px;">node</a> <a href="/tags/hbase/" style="font-size: 15px;">hbase</a> <a href="/tags/nmap/" style="font-size: 15px;">nmap</a> <a href="/tags/motd/" style="font-size: 15px;">motd</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/openmediavault/" style="font-size: 15px;">openmediavault</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/07/23/file-system-features/">文件系统特性及主流调度策略一览</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/23/vmstat-iostat-usage/">vmstat和iostat使用方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/23/mysql-prepared-statements/">MYSQL预编译语句使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/22/bloom-filter/">布隆过滤器原理及Guava源码解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/21/java-aop-exception-trigger/">利用java aop实现异常触发器</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/21/linux-pam-to-openmediavault/">Linux pam在OMV中的应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/20/linux-man-command/">man命令详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/20/linux-login-message/">Linux修改登录提示语(MOTD)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/17/understanding-nmap/">Nmap资料整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/16/U-disk-install-linux/">详细讲解U盘制作启动盘安装Linux</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><script type="text/javascript" src="//Bellpost.disqus.com/recent_comments_widget.js?num_items=5&amp;hide_avatars=1&amp;avatar_size=32&amp;excerpt_length=20&amp;hide_mods=1"></script></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2020 <a href="/." rel="nofollow">Bellpost.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.css"><link rel="stylesheet" type="text/css" href="/css/search.css?v=0.0.0"><script type="text/javascript" src="/js/search.js?v=0.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+   search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script type="text/javascript" src="/js/copycode.js" successtext="复制成功!"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>

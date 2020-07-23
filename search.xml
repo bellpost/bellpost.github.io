@@ -4,7 +4,64 @@
   
     
     <entry>
-      <title>布隆过滤器原理</title>
+      <title>文件系统特性及主流调度策略一览</title>
+      <link href="/2020/07/23/file-system-features/"/>
+      <url>/2020/07/23/file-system-features/</url>
+      
+        <content type="html"><![CDATA[<p><strong>导语：</strong>常见文件系统特性总结及块设备队列调度策略介绍。</p><a id="more"></a><h2 id="常见文件系统表"><a href="#常见文件系统表" class="headerlink" title="常见文件系统表"></a>常见文件系统表</h2><blockquote><p>来自《高性能Mysql》</p></blockquote><table><thead><tr><th align="left">文件系统</th><th align="center">操作系统</th><th align="center">支持日志</th><th align="center">大目录</th></tr></thead><tbody><tr><td align="left">ext2</td><td align="center">GNU/Linux</td><td align="center">否</td><td align="center">否</td></tr><tr><td align="left">ext3</td><td align="center">GNU/Linux</td><td align="center">可选</td><td align="center">可选/部分</td></tr><tr><td align="left">ext4</td><td align="center">GNU/Linux</td><td align="center">是</td><td align="center">是</td></tr><tr><td align="left">HFS Plus</td><td align="center">Mac OS</td><td align="center">可选</td><td align="center">是</td></tr><tr><td align="left">JFS</td><td align="center">GNU/Linux</td><td align="center">是</td><td align="center">否</td></tr><tr><td align="left">NTFS</td><td align="center">Windows</td><td align="center">是</td><td align="center">是</td></tr><tr><td align="left">ReiserFS</td><td align="center">GNU/Linux</td><td align="center">是</td><td align="center">是</td></tr><tr><td align="left">UFS(Solaris)</td><td align="center">Solaris</td><td align="center">是</td><td align="center">否</td></tr><tr><td align="left">UFS(FreeBSD)</td><td align="center">FreeBSD</td><td align="center">否</td><td align="center">可选/部分</td></tr><tr><td align="left">UFS2</td><td align="center">FreeBSD</td><td align="center">否</td><td align="center">可选/部分</td></tr><tr><td align="left">XFS</td><td align="center">GNU/Linux</td><td align="center">是</td><td align="center">是</td></tr><tr><td align="left">ZFS</td><td align="center">Solaris,FreeBSD</td><td align="center">是</td><td align="center">是</td></tr></tbody></table><h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a href="https://zh.wikipedia.org/wiki/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AF%B9%E6%AF%94" target="_blank" rel="noopener">维基百科：文件系统</a></p><h2 id="磁盘队列调度策略"><a href="#磁盘队列调度策略" class="headerlink" title="磁盘队列调度策略"></a>磁盘队列调度策略</h2><p>在Linux上，队列的调度决定了到块设备的请求实际发送到底层设备的顺序。主流的队列调度策略有三种分别是noop、cfq以及deadline。</p><h3 id="noop"><a href="#noop" class="headerlink" title="noop"></a>noop</h3><blockquote><p>本质上就是一个链表实现的fifo队列，并对请求进行简单的合并处理。调度器本身并没有提供任何可疑配置的参数。</p></blockquote><p>适合自己实现了调度算法的块设备，如raid控制器等设备。</p><h3 id="cfq（完全公平队列调度）"><a href="#cfq（完全公平队列调度）" class="headerlink" title="cfq（完全公平队列调度）"></a>cfq（完全公平队列调度）</h3><p>cfq（Completely Fair Queueing）一般是系统默认的调度策略，通常在桌面环境下使用，在高负载的环境下不建议使用。</p><blockquote><p>cfq就是试图给所有进程分配等同的块设备使用的时间片，进程在时间片内，可以将产生的IO请求提交给块设备进行处理，时间片结束，进程的请求将排进它自己的队列，等待下次调度的时候进行处理。</p></blockquote><h3 id="deadline（最终期限调度）"><a href="#deadline（最终期限调度）" class="headerlink" title="deadline（最终期限调度）"></a>deadline（最终期限调度）</h3><blockquote><p>在保证请求按照设备扇区的顺序进行访问的同时，兼顾其它请求不被饿死，要在一个最终期限前被调度到。</p></blockquote><h3 id="参考资料-1"><a href="#参考资料-1" class="headerlink" title="参考资料"></a>参考资料</h3><p>有一说一，下面的资料极其详细的描述了调度策略。本文只做简单的记录。</p><p><a href="https://www.ibm.com/developerworks/cn/linux/l-lo-io-scheduler-optimize-performance/index.html" target="_blank" rel="noopener">调整 Linux I/O 调度器优化系统性能</a></p><p><a href="https://cloud.tencent.com/developer/article/1052883" target="_blank" rel="noopener">如何提高Linux下块设备IO的整体性能？</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>vmstat和iostat使用方法</title>
+      <link href="/2020/07/23/vmstat-iostat-usage/"/>
+      <url>/2020/07/23/vmstat-iostat-usage/</url>
+      
+        <content type="html"><![CDATA[<p><strong>导语：</strong>如何使用vmstat和iostat工具帮助我们了解操作系统状态。</p><a id="more"></a><p>vmstat和iostat命令工具可以帮助我们了解操作系统状态。iostat和vmstat显示的第一行一般是系统从开机到现在的统计信息，一般不具有参考意义，请注意。</p><h2 id="vmstat用法"><a href="#vmstat用法" class="headerlink" title="vmstat用法"></a>vmstat用法</h2><p>vmstat这个命令展示的信息非常全面，涵盖系统的各个方面。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">root@XXXX:~# vmstat 3 3</span><br><span class="line">procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----</span><br><span class="line"> r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st</span><br><span class="line"> 1  0      0 410428 181340 2627360    0    0     9   327    0    0  4  1 95  1  0</span><br><span class="line"> 1  0      0 410164 181340 2627368    0    0     0  1661 2204 4357  2  1 96  2  0</span><br><span class="line"> 0  0      0 410084 181340 2627416    0    0     0   696 2161 4310  1  1 97  1  0</span><br></pre></td></tr></table></figure><p><code>vmstat 3 3</code> 第一个<code>3</code>设置每3秒刷新一次，后面一个<code>3</code>设置刷新次数。</p><p><strong>注意</strong>内存、交换区、I/O统计是块数而不是字节。块大小通常是1024字节。</p><h3 id="参数含义"><a href="#参数含义" class="headerlink" title="参数含义"></a>参数含义</h3><ul><li><p><strong>procs</strong></p><ul><li><strong>r</strong>列显示多少进程在等待CPU</li><li><strong>b</strong>列显示多少进程在阻塞状态（等待I/O）</li></ul></li><li><p><strong>memory</strong></p><ul><li><strong>swpd</strong> 虚拟内存的使用量，如果不为0，则物理内存不足；（页面交换）</li><li><strong>free</strong> 空闲内存</li><li><strong>buff</strong> 用作缓冲区的内存</li><li><strong>cache</strong> 缓存内存使用量</li></ul></li><li><p><strong>swap</strong> 显示每秒有多少块被换入磁盘，多少块换出磁盘</p><ul><li><strong>si</strong> 换入磁盘</li><li><strong>so</strong> 换出磁盘</li></ul></li><li><p><strong>io</strong> 反映磁盘I/O</p><ul><li><strong>bi</strong> 从块设备中读取</li><li>bo 从块设备中写出</li></ul></li><li><p><strong>system</strong></p><ul><li><strong>in</strong> 每秒中断的数量</li><li><strong>cs</strong> 每秒上下文切换的数量</li></ul></li><li><p><strong>cpu</strong> 显示CPU花费在各类操作的百分比</p><ul><li><strong>us</strong> 执行用户代码花费的时间（非内核）</li><li><strong>sy</strong> 执行系统代码（内核）</li><li><strong>id</strong> 空闲时间</li><li><strong>wa</strong> 等待I/O时间</li><li><strong>st</strong> 虚拟机偷走的时间（虚拟化）</li></ul></li></ul><h2 id="iostat用法"><a href="#iostat用法" class="headerlink" title="iostat用法"></a>iostat用法</h2><p><code>iostat -c</code> 可以查看到CPU信息，但是我们主要还是使用这个命令的<code>-d</code>选项，查看设备统计信息。后面的<code>5</code>也是每5秒刷新一次。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">root@upup88-1:~# iostat -dx 5</span><br><span class="line">Device:         rrqm/s   wrqm/s     r/s     w/s    rkB/s    wkB/s avgrq-sz avgqu-sz   await r_await w_await  svctm  %util</span><br><span class="line">vda               0.00    11.09    0.51   26.11    17.99   647.31    49.98     0.11    3.95   13.25    3.77   0.76   2.03</span><br><span class="line"></span><br><span class="line">Device:         rrqm/s   wrqm/s     r/s     w/s    rkB/s    wkB/s avgrq-sz avgqu-sz   await r_await w_await  svctm  %util</span><br><span class="line">vda               0.00    13.00    0.00   38.60     0.00   805.60    41.74     0.04    0.97    0.00    0.97   0.62   2.40</span><br></pre></td></tr></table></figure><h3 id="参数含义-1"><a href="#参数含义-1" class="headerlink" title="参数含义"></a>参数含义</h3><ul><li><strong>rrqm/s</strong> 每秒合并到设备中的读取请求的数量（合并是将多个逻辑请求合并为一个请求到实际磁盘）</li><li><strong>wrqm/s</strong> 每秒合并到设备中的写入请求的数量</li><li><strong>r/s</strong> 每秒发送到设备的读请求</li><li><strong>w/s</strong> 每秒发送到设备的写请求</li><li><strong>rkB/s</strong> 每秒从设备读取的扇区数</li><li><strong>wkB/s</strong> 每秒从设备写入的扇区数</li><li><strong>avgrq-sz</strong> 发出到设备的请求的平均大小（以扇区为单位）。</li><li><strong>avgqu-sz</strong> 发出到设备的请求的平均队列长度。</li><li><strong>await</strong> 磁盘排队花费的毫秒数 </li><li><strong>r_await</strong> 磁盘读请求排队花费的毫秒数 </li><li><strong>w_await</strong> 磁盘写请求排队花费的毫秒数</li><li><strong>svctm</strong> 服务请求花费的时间，不包括排队时间</li><li><strong>%util</strong> 向设备发出I/O请求的经过时间百分比，串行时接近100%时设备饱和，并行时不能反映设备极限。</li></ul><h3 id="计算请求服务并发数"><a href="#计算请求服务并发数" class="headerlink" title="计算请求服务并发数"></a>计算请求服务并发数</h3><p>读写的单位是秒，服务时间单位是千分之一毫秒。</p><p>计算方式一：<br>              concurrency = （r/s + w/s）* (svctm / 1000)</p><blockquote><pre><code>利特尔法则（英语：Little&apos;s law），基于等候理论，由约翰·利特尔在1954年提出。利特尔法则可用于一个稳定的、非占先式的系统中。其内容为：在一个稳定的系统（L）中，长期的平均顾客人数，等于长期的有效抵达率（λ），乘以顾客在这个系统中平均的等待时间（W）；----维基百科</code></pre></blockquote><p>计算方式二：<br>          concurrency = (avuqu_sz * svctm) / await</p><p>通过平均队列大小、服务时间、以及平均等待时间。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>MYSQL预编译语句使用</title>
+      <link href="/2020/07/23/mysql-prepared-statements/"/>
+      <url>/2020/07/23/mysql-prepared-statements/</url>
+      
+        <content type="html"><![CDATA[<p><strong>导语：</strong>在MySQL 4.1或更高版本的mysql上已经支持了预编译特性。通过该特性我们能提高执行效率。</p><a id="more"></a><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>传统的执行sql语句，都是将数据和sql结合以文本格式发送给服务端，这样的操作有两个问题，每次执行该语句mysql都需要解析一次sql，并将结果集转换为字符串，返回给客户端。性能以及安全性得不到保证。</p><p>为了解决这个问题，在MySQL 4.1或更高版本的mysql上已经支持了预编译特性。预处理语句使用二进制协议，安全性得到了提高，抓包不容易拿到原始sql。二进制协议也比文本协议高效。</p><h2 id="使用流程"><a href="#使用流程" class="headerlink" title="使用流程"></a>使用流程</h2><p>首先，准备好不包含数据的sql语句，将该sql语句发送给服务端预编译，在预编译通过的情况下，客户端传递数据执行该语句。多次执行不需要多次发送sql。</p><p>mysql提供了基于sql语法的三个sql语句：</p><ul><li>PREPARE</li><li>EXECUTE </li><li>DEALLOCATE PREPARE</li></ul><p>在mysql上执行sql语句流程如下：</p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; PREPARE stmt from 'select * from mysql.user where user = ?';</span><br><span class="line"></span><br><span class="line">mysql&gt; set @query_user = 'root';</span><br><span class="line"></span><br><span class="line">mysql&gt; EXECUTE stmt USING @query_user;</span><br><span class="line"></span><br><span class="line"> mysql&gt; DEALLOCATE PREPARE stmt;</span><br></pre></td></tr></table></figure><p>删除预处理语句使用: <code>DROP PREPARE stmt_name</code></p><h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul><li>可以提前测试sql语言是否能正常工作</li><li>安全性高</li><li>传输效率高，二进制协议</li><li>可重用</li></ul><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://dev.mysql.com/doc/refman/5.7/en/sql-prepared-statements.html" target="_blank" rel="noopener">MySQL 5.7 Reference Manual 5.7</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据库 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>布隆过滤器原理及Guava源码解析</title>
       <link href="/2020/07/22/bloom-filter/"/>
       <url>/2020/07/22/bloom-filter/</url>
       
